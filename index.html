@@ -9,8 +9,12 @@
     <title>Etch-a-Sketch</title>
 </head>
 <body>
-    <div class ="grid" draggable = "false">
-       
+    <div class ="colorPicker">
+        <label for="colorPicker">Color:</label>
+        <input type ="color" name ="colorPicker" id ="colorPicker" value ="#80ff80" onchange ="getColor()">
     </div>
+
+    <div class ="grid" draggable = "false"></div>
+    
 </body>
 </html>

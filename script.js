@@ -23,7 +23,13 @@ createGrid();
 
 
 const griditem = document.querySelectorAll('.square');
-let chosenColor = 'blue'; 
+const chosenColor = document.getElementById('colorPicker');
+let color = "#80ff80";
+
+function getColor(){
+    color = chosenColor.value;
+    console.log(color);
+}
 
 griditem.forEach(item =>{
     item.addEventListener("mousedown", function(){mouseIsDown =true})
@@ -34,12 +40,12 @@ griditem.forEach(item =>{
 griditem.forEach(item =>{
     item.addEventListener('mousemove', function squareColor() {
         if(mouseIsDown){
-            item.setAttribute('style', `background-color: ${chosenColor}`);
+            item.setAttribute('style', `background-color: ${color}`);
         }
     })
     item.addEventListener('mousedown',function squareColor()
     {if(mouseIsDown){
-        item.setAttribute('style', `background-color: ${chosenColor}`);}
+        item.setAttribute('style', `background-color: ${color}`);}
     });   
 });
 
