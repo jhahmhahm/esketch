@@ -14,6 +14,13 @@
         <input type ="color" name ="colorPicker" id ="colorPicker" value ="#80ff80" onchange ="getColor()">
     </div>
 
+    <div class ="eraserToggle">
+        <button onclick ="toggleEraser()" name ="eraserToggle" id ="eraserToggle" value ="off" > Toggle Eraser</button>
+    </div>
+
+    <div class ="gridSizeSlider">
+        <input type ="range" id ="gridSizeSlider" name ="gridSizeSlider" min ="5" max ="60" step ="1" value ="5" onchange ="gridSizeChange()">
+    </div>
     <div class ="grid" draggable = "false"></div>
     
 </body>

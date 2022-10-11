@@ -22,3 +22,11 @@ body{
     border-color: black;
     border-width: 1px;
 }
+
+.eraserToggle{
+    background-color: darkgray;
+}
+
+.eraserToggleON{
+    background-color: #B4CCE1;
+}
