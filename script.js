@@ -1,9 +1,22 @@
 const grid = document.querySelector('.grid');
 let mouseIsDown; 
 let gridSize = 5;
+const eraserToggle = document.getElementById('eraserToggle');
+const griditem = document.querySelectorAll('.square');
+const gridSlider = document.getElementById('gridSizeSlider');
+const gridRange = document.getElementById('gridRange');
+const gridP = document.createElement("p");
+const chosenColor = document.getElementById('colorPicker');
+const clearbtn = document.getElementById('clearbtn');
+let color = "#80ff80";
+window.addEventListener("mouseup", function(){mouseIsDown = false});
 
-//creates our grid based on the gridsize. 
+
+
+//creates our grid based on the gridsize. and adds an eventlistner to each div 
 function createGrid(){
+    gridP.textContent = `${gridSize} X ${gridSize}`;
+    gridRange.appendChild(gridP);
     let squareSize = (600/gridSize); 
 
     grid.style.gridTemplateColumns = `repeat(${gridSize},${squareSize}px)`;
@@ -15,6 +28,34 @@ function createGrid(){
         square.setAttribute('draggable', 'false' );
         grid.appendChild(square);
     }
+
+    let gridPixels = grid.querySelectorAll('div');
+
+    gridPixels.forEach(item =>{
+        item.addEventListener("mousedown", function(){mouseIsDown =true;})
+        item.addEventListener("mouseup", function(){mouseIsDown = false;})
+        });
+
+    gridPixels.forEach(item =>{
+        item.addEventListener('mousemove', function squareColor() {
+            if(mouseIsDown && eraserToggle.value === "off"){
+                item.setAttribute('style', `background-color: ${color}`);
+            }
+    
+            else if(mouseIsDown && eraserToggle.value === "on"){
+                item.setAttribute('style', `background-color: white`);
+            }
+        })
+        item.addEventListener('mousedown',function squareColor()
+        {if(mouseIsDown && eraserToggle.value ==="off"){
+            item.setAttribute('style', `background-color: ${color}`);}
+            
+        else if(mouseIsDown && eraserToggle.value === "on"){
+            item.setAttribute('style', `background-color: white`);}    
+        
+        });
+    });
+        
 };
 
 createGrid();
@@ -25,27 +66,16 @@ function gridSizeChange(){
     deleteGrid()
     createGrid();
 }
-
 function deleteGrid(){
     while(grid.firstChild){
         grid.lastChild=null;
         grid.removeChild(grid.lastChild);
     }
 }
-const eraserToggle = document.getElementById('eraserToggle');
-const griditem = document.querySelectorAll('.square');
-const gridSlider = document.getElementById('gridSizeSlider');
-const gridP = document.createElement("p");
-const chosenColor = document.getElementById('colorPicker');
-let color = "#80ff80";
-window.addEventListener("mouseup", function(){mouseIsDown = false});
-
-
 //changes the color of the button based on on/off toggle. off = grey , on = blue 
 eraserToggle.addEventListener("click", function(){ 
     eraserToggle.classList.toggle("eraserToggleON")
 })
-
 //changes the value of the eraser button between off to on 
 function toggleEraser(){ 
     if(eraserToggle.value === "off"){
@@ -58,40 +88,9 @@ function toggleEraser(){
 
     console.log(eraserToggle.value);
 }
-
-
 // returns the chosen color of the color picker 
 function getColor(){
     color = chosenColor.value;
     console.log(color);
 }
 
-//querySelector turns our selected elements into an array. So we use the forEach method to parse through each item. For each Item, this function LISTENS if the mouse is clicked down on it and returns true/false
-
-
-griditem.forEach(item =>{
-    item.addEventListener("mousedown", function(){mouseIsDown =true;})
-    item.addEventListener("mouseup", function(){mouseIsDown = false;})
-    });
-
-//forEach item, we listen for BOTH mousemove and mousedown on each grid item only if mouseIsDown is true. If the eraser toggle is off, it fills the grid with the selected color. If eraser toggle is on, then it fills the grid with the color WHITE to act as an eraser. 
-
-griditem.forEach(item =>{
-    item.addEventListener('mousemove', function squareColor() {
-        if(mouseIsDown && eraserToggle.value === "off"){
-            item.setAttribute('style', `background-color: ${color}`);
-        }
-
-        else if(mouseIsDown && eraserToggle.value === "on"){
-            item.setAttribute('style', `background-color: white`);
-        }
-    })
-    item.addEventListener('mousedown',function squareColor()
-    {if(mouseIsDown && eraserToggle.value ==="off"){
-        item.setAttribute('style', `background-color: ${color}`);}
-        
-    else if(mouseIsDown && eraserToggle.value === "on"){
-        item.setAttribute('style', `background-color: white`);}    
-    
-    });
-});

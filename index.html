@@ -18,9 +18,11 @@
         <button onclick ="toggleEraser()" name ="eraserToggle" id ="eraserToggle" value ="off" > Toggle Eraser</button>
     </div>
 
-    <div class ="gridSizeSlider">
+    <div class ="gridRange" id ="gridRange">
         <input type ="range" id ="gridSizeSlider" name ="gridSizeSlider" min ="5" max ="60" step ="1" value ="5" onchange ="gridSizeChange()">
     </div>
+
+    <button id ="clearbtn" onclick ="gridSizeChange()">Clear</button>
     <div class ="grid" draggable = "false"></div>
     
 </body>
